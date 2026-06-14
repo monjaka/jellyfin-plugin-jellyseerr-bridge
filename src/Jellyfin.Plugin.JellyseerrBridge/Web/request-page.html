@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request - Jellyseerr Bridge</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #101010;
+      color: rgba(255,255,255,.92);
+    }
+    body {
+      margin: 0;
+      background: #101010;
+    }
+    .shell {
+      max-width: 112rem;
+      margin: 0 auto;
+      padding: 1rem clamp(1rem, 3vw, 2.5rem) 2.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .page-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      padding-bottom: .75rem;
+    }
+    .page-tab {
+      min-height: 2.45rem;
+      border: 1px solid transparent;
+      border-radius: .35rem;
+      background: transparent;
+      color: rgba(255,255,255,.78);
+      padding: 0 .85rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .page-tab.current {
+      border-color: #00a4dc;
+      background: rgba(0,164,220,.2);
+      color: rgba(255,255,255,.95);
+    }
+    .top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, 28rem);
+      gap: 1rem;
+      align-items: end;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      letter-spacing: 0;
+    }
+    .meta {
+      margin-top: .35rem;
+      color: rgba(255,255,255,.62);
+      font-size: .92rem;
+    }
+    .search {
+      width: 100%;
+      height: 2.65rem;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: .35rem;
+      background: rgba(255,255,255,.08);
+      color: inherit;
+      padding: 0 .85rem;
+    }
+    .search-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: .55rem;
+      align-items: center;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+    button {
+      font: inherit;
+    }
+    .tab,
+    .more,
+    .filter-toggle {
+      min-height: 2.45rem;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: .35rem;
+      background: rgba(255,255,255,.08);
+      color: inherit;
+      padding: 0 .75rem;
+      cursor: pointer;
+    }
+    .filter-panel {
+      display: none;
+      grid-template-columns: repeat(4, minmax(9rem, 1fr));
+      gap: .75rem;
+      padding: .85rem;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: .4rem;
+      background: rgba(255,255,255,.05);
+    }
+    .filter-panel.open {
+      display: grid;
+    }
+    .sort-panel {
+      grid-template-columns: minmax(12rem, 1fr) auto;
+    }
+    .filter-field {
+      display: grid;
+      gap: .35rem;
+      min-width: 0;
+    }
+    .filter-field label {
+      color: rgba(255,255,255,.68);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+    .filter-field input,
+    .filter-field select {
+      width: 100%;
+      min-height: 2.35rem;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: .35rem;
+      background: #242424;
+      color: rgba(255,255,255,.92);
+      padding: 0 .65rem;
+    }
+    .filter-field select option {
+      background: #fff;
+      color: #101010;
+    }
+    .filter-actions {
+      display: flex;
+      gap: .5rem;
+      align-items: end;
+    }
+    .tab.selected {
+      border-color: #00a4dc;
+      background: rgba(0,164,220,.22);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      border-radius: .4rem;
+      background: rgba(255,255,255,.06);
+      overflow: hidden;
+      min-width: 0;
+      display: grid;
+    }
+    .card-link {
+      display: grid;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .card-link:focus {
+      outline: 2px solid #00a4dc;
+      outline-offset: -2px;
+    }
+    .poster {
+      display: block;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      background: rgba(255,255,255,.08);
+    }
+    .poster-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      color: rgba(255,255,255,.55);
+      aspect-ratio: 2 / 3;
+      background: rgba(255,255,255,.08);
+    }
+    .card-body {
+      padding: .7rem;
+      display: grid;
+      gap: .55rem;
+    }
+    .card-actions {
+      padding: 0 .7rem .7rem;
+    }
+    .name {
+      font-size: .95rem;
+      line-height: 1.25;
+      font-weight: 700;
+      min-height: 2.4em;
+      overflow-wrap: anywhere;
+    }
+    .status {
+      font-size: .78rem;
+      color: rgba(255,255,255,.65);
+      text-transform: capitalize;
+    }
+    .action {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 2.25rem;
+      border: 0;
+      border-radius: .35rem;
+      background: #00a4dc;
+      color: #061018;
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+      width: 100%;
+    }
+    .action.muted,
+    .action:disabled {
+      background: rgba(255,255,255,.14);
+      color: rgba(255,255,255,.84);
+      cursor: default;
+    }
+    .action.error {
+      background: rgba(216,65,65,.22);
+      color: rgba(255,255,255,.9);
+    }
+    .back {
+      justify-self: start;
+      min-height: 2.35rem;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: .35rem;
+      background: rgba(255,255,255,.08);
+      color: inherit;
+      padding: 0 .85rem;
+      cursor: pointer;
+    }
+    .detail-back {
+      width: 2.45rem;
+      padding: 0;
+      margin-bottom: .55rem;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+    .detail-back[hidden] {
+      display: none;
+    }
+    .detail {
+      display: grid;
+      gap: 1rem;
+    }
+    .detail-hero {
+      display: grid;
+      grid-template-columns: minmax(11rem, 17rem) minmax(0, 1fr);
+      gap: clamp(1rem, 3vw, 2rem);
+      align-items: start;
+    }
+    .detail-poster {
+      display: block;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: .45rem;
+      background: rgba(255,255,255,.08);
+    }
+    .detail-copy {
+      display: grid;
+      gap: .75rem;
+      min-width: 0;
+    }
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: clamp(1.55rem, 3vw, 2.4rem);
+      line-height: 1.08;
+    }
+    h3 {
+      font-size: 1.25rem;
+    }
+    .tagline {
+      color: rgba(255,255,255,.72);
+      font-weight: 700;
+    }
+    .overview {
+      margin: 0;
+      color: rgba(255,255,255,.72);
+      line-height: 1.5;
+    }
+    .detail-action {
+      max-width: 16rem;
+    }
+    .series-summary {
+      color: rgba(255,255,255,.72);
+    }
+    .season-section {
+      display: grid;
+      gap: .75rem;
+    }
+    .season-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+      gap: 1rem;
+    }
+    .season-card {
+      display: grid;
+      grid-template-columns: 6rem minmax(0, 1fr);
+      gap: .85rem;
+      border-radius: .4rem;
+      background: rgba(255,255,255,.06);
+      padding: .75rem;
+      min-width: 0;
+    }
+    .season-poster {
+      display: block;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: .35rem;
+      background: rgba(255,255,255,.08);
+    }
+    .season-body {
+      display: grid;
+      gap: .55rem;
+      align-content: start;
+      min-width: 0;
+    }
+    .season-body .name {
+      min-height: auto;
+    }
+    .message {
+      color: rgba(255,255,255,.68);
+      padding: 1rem 0;
+    }
+    .footer {
+      display: flex;
+      justify-content: center;
+      padding: .5rem 0 2rem;
+    }
+    @media (max-width: 760px) {
+      .top {
+        grid-template-columns: 1fr;
+      }
+      .filter-panel {
+        grid-template-columns: 1fr;
+      }
+      .search-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .detail-hero {
+        grid-template-columns: 1fr;
+      }
+      .detail-poster {
+        max-width: 16rem;
+      }
+      .season-card {
+        grid-template-columns: 5rem minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="page-tabs" aria-label="Jellyfin page navigation">
+      <a class="page-tab" href="/web/#/home">Home</a>
+      <a class="page-tab" href="/web/#/favorites">Favourites</a>
+      <a class="page-tab current" href="/JellyseerrBridge/Page?v=20260614-2305">Request</a>
+    </nav>
+    <section class="top">
+      <div>
+        <button id="detailBack" class="back detail-back" data-back="true" type="button" aria-label="Back to request results" hidden>&#8592;</button>
+        <h1>Request</h1>
+        <div class="meta" id="status">Search and discover media from Jellyseerr without leaving Jellyfin.</div>
+      </div>
+      <div class="search-row">
+        <input id="search" class="search" type="search" placeholder="Search movies and shows" autocomplete="off" spellcheck="false">
+        <button id="sortToggle" class="filter-toggle" type="button" aria-expanded="false">Sort</button>
+        <button id="filterToggle" class="filter-toggle" type="button" aria-expanded="false">Filters</button>
+      </div>
+    </section>
+    <section id="sorts" class="filter-panel sort-panel" aria-label="Request sorting">
+      <div class="filter-field">
+        <label for="sortSelect">Sort by</label>
+        <select id="sortSelect">
+          <option value="">Jellyseerr default</option>
+          <option value="release-desc">Release date newest</option>
+          <option value="release-asc">Release date oldest</option>
+          <option value="title-asc">Alphabetical A-Z</option>
+          <option value="title-desc">Alphabetical Z-A</option>
+          <option value="rating-desc">Rating high to low</option>
+          <option value="rating-asc">Rating low to high</option>
+        </select>
+      </div>
+      <div class="filter-actions">
+        <button class="filter-toggle" id="applySort" type="button">Apply</button>
+        <button class="filter-toggle" id="clearSort" type="button">Clear</button>
+      </div>
+    </section>
+    <section id="filters" class="filter-panel" aria-label="Request filters">
+      <div class="filter-field">
+        <label for="ratingFilter">Minimum rating</label>
+        <select id="ratingFilter">
+          <option value="">Any rating</option>
+          <option value="6">6+</option>
+          <option value="7">7+</option>
+          <option value="8">8+</option>
+          <option value="9">9+</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label for="releaseFromFilter">Released after</label>
+        <input id="releaseFromFilter" type="date">
+      </div>
+      <div class="filter-field">
+        <label for="releaseToFilter">Released before</label>
+        <input id="releaseToFilter" type="date">
+      </div>
+      <div class="filter-field">
+        <label for="providerFilter">Provider</label>
+        <select id="providerFilter">
+          <option value="">Any provider</option>
+          <option value="8">Netflix</option>
+          <option value="337">Disney+</option>
+          <option value="9">Prime Video</option>
+          <option value="531">Paramount+</option>
+          <option value="350">Apple TV+</option>
+        </select>
+      </div>
+      <div class="filter-actions">
+        <button class="filter-toggle" id="applyFilters" type="button">Apply</button>
+        <button class="filter-toggle" id="clearFilters" type="button">Clear</button>
+      </div>
+    </section>
+    <div class="tabs" id="tabs"></div>
+    <section id="results"></section>
+    <div class="footer" id="footer"></div>
+  </main>
+  <script src="/JellyseerrBridge/Assets/request-page.js?v=20260614-2305"></script>
+</body>
+</html>

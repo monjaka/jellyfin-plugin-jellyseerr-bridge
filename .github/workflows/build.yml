@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+      - run: dotnet restore
+      - run: dotnet build -c Release --no-restore
+      - name: Package plugin
+        run: |
+          mkdir -p dist/JellyseerrBridge_0.1.0.0
+          cp -a src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/. dist/JellyseerrBridge_0.1.0.0/
+          cd dist
+          zip -r JellyseerrBridge_0.1.0.0.zip JellyseerrBridge_0.1.0.0
+          sha256sum JellyseerrBridge_0.1.0.0.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: JellyseerrBridge_0.1.0.0
+          path: dist/JellyseerrBridge_0.1.0.0.zip

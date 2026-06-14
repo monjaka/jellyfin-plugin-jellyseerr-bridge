@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jellyseerr Bridge</title>
+</head>
+<body>
+  <div id="JellyseerrBridgeConfigPage" data-role="page" class="page type-interior pluginConfigurationPage">
+    <div data-role="content">
+      <div class="content-primary">
+        <form id="JellyseerrBridgeConfigForm">
+          <div class="sectionTitleContainer flex align-items-center">
+            <h2 class="sectionTitle">Jellyseerr Bridge</h2>
+          </div>
+
+          <div class="inputContainer">
+            <input is="emby-input" id="JellyseerrBaseUrl" label="Jellyseerr Base URL" placeholder="http://192.168.9.10:5055">
+            <div class="fieldDescription">The internal Jellyseerr URL reachable from the Jellyfin server.</div>
+          </div>
+
+          <div class="inputContainer">
+            <input is="emby-input" id="JellyseerrApiKey" type="password" label="Jellyseerr API Key" autocomplete="off">
+            <div class="fieldDescription">Stored server-side by Jellyfin. It is not sent to browsers by plugin endpoints.</div>
+          </div>
+
+          <label class="checkboxContainer">
+            <input is="emby-checkbox" type="checkbox" id="EnableRequestSubmission">
+            <span>Enable request submission</span>
+          </label>
+          <div class="fieldDescription checkboxFieldDescription">Leave disabled until you have tested search and configured Jellyseerr.</div>
+
+          <label class="checkboxContainer">
+            <input is="emby-checkbox" type="checkbox" id="Enable4KRequests">
+            <span>Enable 4K requests</span>
+          </label>
+
+          <div class="inputContainer">
+            <textarea is="emby-textarea" id="AllowedUserIds" label="Allowed Jellyfin User IDs"></textarea>
+            <div class="fieldDescription">Optional. One Jellyfin user ID per line. Empty allows any authenticated Jellyfin user to submit requests.</div>
+          </div>
+
+          <div>
+            <button is="emby-button" type="submit" class="raised button-submit block">
+              <span>Save</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script type="text/javascript">
+      (() => {
+        const pluginId = "d2fcf9c8-c3c7-47e8-9dd6-8de9867e36bb";
+        const page = document.querySelector("#JellyseerrBridgeConfigPage");
+        const form = page.querySelector("#JellyseerrBridgeConfigForm");
+
+        page.addEventListener("pageshow", () => {
+          Dashboard.showLoadingMsg();
+          ApiClient.getPluginConfiguration(pluginId).then((config) => {
+            page.querySelector("#JellyseerrBaseUrl").value = config.JellyseerrBaseUrl || "";
+            page.querySelector("#JellyseerrApiKey").value = config.JellyseerrApiKey || "";
+            page.querySelector("#EnableRequestSubmission").checked = !!config.EnableRequestSubmission;
+            page.querySelector("#Enable4KRequests").checked = !!config.Enable4KRequests;
+            page.querySelector("#AllowedUserIds").value = (config.AllowedUserIds || []).join("\n");
+            Dashboard.hideLoadingMsg();
+          });
+        });
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          Dashboard.showLoadingMsg();
+          ApiClient.getPluginConfiguration(pluginId).then((config) => {
+            config.JellyseerrBaseUrl = page.querySelector("#JellyseerrBaseUrl").value.trim();
+            config.JellyseerrApiKey = page.querySelector("#JellyseerrApiKey").value.trim();
+            config.EnableRequestSubmission = page.querySelector("#EnableRequestSubmission").checked;
+            config.Enable4KRequests = page.querySelector("#Enable4KRequests").checked;
+            config.AllowedUserIds = page.querySelector("#AllowedUserIds").value
+              .split(/\r?\n/)
+              .map((value) => value.trim())
+              .filter(Boolean);
+            return ApiClient.updatePluginConfiguration(pluginId, config);
+          }).then(() => {
+            Dashboard.processPluginConfigurationUpdateResult();
+          });
+          return false;
+        });
+      })();
+    </script>
+  </div>
+</body>
+</html>

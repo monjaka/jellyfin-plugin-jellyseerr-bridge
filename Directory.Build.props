@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <Authors>alternate.redirect</Authors>
+    <Company>alternate.redirect</Company>
+    <Product>Jellyseerr Bridge for Jellyfin</Product>
+    <RepositoryUrl>https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+</Project>
