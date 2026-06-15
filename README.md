@@ -2,6 +2,10 @@
 
 Jellyseerr Bridge adds a Jellyseerr-powered request page to Jellyfin without exposing the Jellyseerr API key to browsers.
 
+<img width="1117" height="283" alt="2026-06-14_22-46_1" src="https://github.com/user-attachments/assets/2d508176-25dd-4d94-9e12-2fc7458b2387" />
+<img width="1488" height="641" alt="2026-06-14_22-45" src="https://github.com/user-attachments/assets/7ff5b1f4-e7d5-47b2-804d-bf067ac31f5c" />
+
+
 ## Standard Install
 
 1. In Jellyfin, open Dashboard -> Plugins -> Repositories.
@@ -20,6 +24,7 @@ Jellyseerr Bridge adds a Jellyseerr-powered request page to Jellyfin without exp
    - Jellyseerr Base URL
    - Jellyseerr API Key
    - Enable Request Submission
+<img width="904" height="649" alt="image" src="https://github.com/user-attachments/assets/da23e483-1528-4bf4-b687-522db8ae9114" />
 
 7. Install the Jellyfin Web navigation button:
 
