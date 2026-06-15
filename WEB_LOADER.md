@@ -1,8 +1,8 @@
 # Jellyfin Web Navigation Loader
 
-Jellyfin server plugins can serve backend APIs, plugin configuration pages, and main-menu plugin pages.
+Jellyfin server plugins can serve backend APIs and plugin configuration pages.
 
-Jellyseerr Bridge includes a built-in Jellyfin main-menu `Request` page. The optional loader below is only for installs that also want a top `Request` tab beside Home and Favourites.
+Jellyseerr Bridge registers a `Request` entry with Jellyfin Plugin Pages when that integration is installed. It also attempts to inject this loader into Jellyfin Web on plugin startup. The manual loader below is only a fallback for installs where automatic navigation is unavailable.
 
 This plugin serves a small entry script:
 

@@ -30,8 +30,8 @@ After `manifest.json` and the release zip are published on GitHub:
 5. Install `Jellyseerr Bridge`.
 6. Restart Jellyfin.
 7. Configure the plugin.
-8. Confirm that the Jellyfin main menu has a `Request` entry.
-9. Optional: install the Jellyfin Web loader for an extra top `Request` tab beside Home and Favourites:
+8. Confirm that Jellyfin Web has a `Request` tab or side-menu entry.
+9. If the Jellyfin Web root is read-only and the entry does not appear, install the fallback loader manually:
 
    ```bash
    curl -fsSLO https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main/scripts/install-web-loader.sh
@@ -54,14 +54,14 @@ dotnet build -c Release
 Create a plugin folder on the Jellyfin server:
 
 ```bash
-sudo mkdir -p /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2
+sudo mkdir -p /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.4
 ```
 
 Copy the build output into that folder:
 
 ```bash
-sudo cp src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/* /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2/
-sudo chown -R jellyfin:jellyfin /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2
+sudo cp src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/* /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.4/
+sudo chown -R jellyfin:jellyfin /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.4
 ```
 
 Restart Jellyfin:
@@ -94,9 +94,9 @@ The request page is served by Jellyfin:
 https://your-jellyfin-domain/JellyseerrBridge/Page
 ```
 
-After restart, the plugin also adds a Jellyfin main-menu `Request` page.
+After restart, the plugin registers a `Request` entry with Jellyfin Plugin Pages when that integration is installed. It also attempts Jellyfin Web loader injection as a fallback.
 
-The plugin also serves an optional Jellyfin Web entry script:
+The plugin serves this Jellyfin Web entry script:
 
 ```text
 /JellyseerrBridge/Assets/request-entry.js
@@ -120,7 +120,7 @@ sudo systemctl stop jellyfin
 Remove the plugin folder:
 
 ```bash
-sudo rm -rf /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2
+sudo rm -rf /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.4
 ```
 
 Remove the plugin configuration if you also want to delete saved settings:
