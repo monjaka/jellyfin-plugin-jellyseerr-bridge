@@ -25,7 +25,6 @@ Jellyseerr Bridge adds a Jellyseerr-powered request page to Jellyfin without exp
 
    ```bash
    curl -fsSLO https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main/scripts/install-web-loader.sh
-   less install-web-loader.sh
    sudo bash install-web-loader.sh
    sudo systemctl restart jellyfin
    ```
