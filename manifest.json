@@ -5,15 +5,15 @@
         "description":  "A Jellyfin plugin that provides a Jellyseerr-powered request page with server-side API-key forwarding.",
         "versions":  [
                          {
-                             "url":  "https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge/releases/download/v0.1.4/JellyseerrBridge_0.1.0.4.zip",
-                             "checksum":  "a3588b177236305c632be4a49d753571",
-                             "version":  "0.1.0.4",
+                             "url":  "https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge/releases/download/v0.1.5/JellyseerrBridge_0.1.0.5.zip",
+                             "checksum":  "eea7309b089ea102e54b31983418d104",
+                             "version":  "0.1.0.5",
                              "repositoryUrl":  "https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main/manifest.json",
-                             "timestamp":  "2026-06-15T04:30:00Z",
-                             "sourceUrl":  "https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge/releases/download/v0.1.4/JellyseerrBridge_0.1.0.4.zip",
+                             "timestamp":  "2026-06-15T04:55:00Z",
+                             "sourceUrl":  "https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge/releases/download/v0.1.5/JellyseerrBridge_0.1.0.5.zip",
                              "repositoryName":  "Jellyseerr Bridge",
                              "targetAbi":  "10.11.0.0",
-                             "changelog":  "Restores settings and adds a Plugin Pages home-menu entry with web-loader fallback."
+                             "changelog":  "Simplifies setup around the standard plugin install plus one web-loader installer command."
                          }
                      ],
         "category":  "General",

@@ -1,8 +1,8 @@
 # Jellyfin Web Navigation Loader
 
-Jellyfin server plugins can serve backend APIs and plugin configuration pages.
+Jellyfin server plugins can serve backend APIs and plugin configuration pages. Jellyfin Web navigation requires adding a small loader tag to Jellyfin Web's `index.html`.
 
-Jellyseerr Bridge registers a `Request` entry with Jellyfin Plugin Pages when that integration is installed. It also attempts to inject this loader into Jellyfin Web on plugin startup. The manual loader below is only a fallback for installs where automatic navigation is unavailable.
+This repository provides installer and uninstaller scripts so users do not need to edit `index.html` by hand.
 
 This plugin serves a small entry script:
 
@@ -15,9 +15,9 @@ When loaded by Jellyfin Web, it adds:
 - a top `Request` tab beside Home and Favourites
 - a side-menu `Requests` item
 
-## Recommended Loader Install
+## Recommended Install
 
-The easiest repeatable method is the installer script:
+Run this on the Jellyfin server after installing the Jellyseerr Bridge plugin:
 
 ```bash
 curl -fsSLO https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main/scripts/install-web-loader.sh
@@ -26,7 +26,7 @@ sudo bash install-web-loader.sh
 sudo systemctl restart jellyfin
 ```
 
-The script:
+The installer:
 
 - finds common Jellyfin Web `index.html` locations
 - backs up `index.html` before editing it

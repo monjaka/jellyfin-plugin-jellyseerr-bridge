@@ -3,8 +3,8 @@ set -euo pipefail
 
 owner="${1:?owner/org is required}"
 repo="${2:-jellyfin-plugin-jellyseerr-bridge}"
-version="${3:-0.1.0.4}"
-tag="${4:-v0.1.4}"
+version="${3:-0.1.0.5}"
+tag="${4:-v0.1.5}"
 zip_path="${5:-dist/JellyseerrBridge_${version}.zip}"
 target_abi="${6:-10.11.0.0}"
 
@@ -31,7 +31,7 @@ cat <<JSON
     "versions": [
       {
         "version": "${version}",
-        "changelog": "Restores settings and adds a Plugin Pages home-menu entry with web-loader fallback.",
+        "changelog": "Simplifies setup around the standard plugin install plus one web-loader installer command.",
         "targetAbi": "${target_abi}",
         "sourceUrl": "${source_url}",
         "checksum": "${checksum}",

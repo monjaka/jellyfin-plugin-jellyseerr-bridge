@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0.5
+
+Simplifies installation around the standard Jellyfin plugin install plus one web-loader installer command.
+
+Changes:
+
+- Removed the experimental automatic Plugin Pages and Jellyfin Web self-injection behavior.
+- Restored the plugin to server-side APIs, request page, and dashboard settings only.
+- Moved the user-facing Jellyfin Web navigation setup to `scripts/install-web-loader.sh`.
+- Reworked the README so the standard install steps are at the top.
+
 ## 0.1.0.4
 
 Adds a Jellyfin Plugin Pages home-menu entry, matching the integration style used by Jellyfin Enhanced.
