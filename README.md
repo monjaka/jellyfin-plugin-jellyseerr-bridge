@@ -26,7 +26,7 @@ The plugin provides:
 2. Copy the files from `src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/` into a Jellyfin plugin folder, for example:
 
    ```text
-   /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.0/
+   /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2/
    ```
 
 3. Restart Jellyfin.

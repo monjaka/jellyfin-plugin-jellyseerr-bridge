@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "0.1.0.0",
+    [string]$Version = "0.1.0.2",
     [string]$Framework = "net9.0"
 )
 

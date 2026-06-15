@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-version="${1:-0.1.0.0}"
+version="${1:-0.1.0.2}"
 framework="${2:-net9.0}"
 project="src/Jellyfin.Plugin.JellyseerrBridge/Jellyfin.Plugin.JellyseerrBridge.csproj"
 build_dir="src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/${framework}"
@@ -18,8 +18,8 @@ cp -a "$build_dir"/. "$plugin_dir"/
 
 (cd "$dist_dir" && zip -r "JellyseerrBridge_${version}.zip" "JellyseerrBridge_${version}")
 
-if command -v sha256sum >/dev/null 2>&1; then
-md5sum "$zip_file"
+if command -v md5sum >/dev/null 2>&1; then
+  md5sum "$zip_file"
 fi
 
 echo "$zip_file"

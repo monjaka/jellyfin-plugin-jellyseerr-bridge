@@ -54,14 +54,14 @@ dotnet build -c Release
 Create a plugin folder on the Jellyfin server:
 
 ```bash
-sudo mkdir -p /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.0
+sudo mkdir -p /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2
 ```
 
 Copy the build output into that folder:
 
 ```bash
-sudo cp src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/* /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.0/
-sudo chown -R jellyfin:jellyfin /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.0
+sudo cp src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/* /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2/
+sudo chown -R jellyfin:jellyfin /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2
 ```
 
 Restart Jellyfin:
@@ -120,7 +120,7 @@ sudo systemctl stop jellyfin
 Remove the plugin folder:
 
 ```bash
-sudo rm -rf /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.0
+sudo rm -rf /var/lib/jellyfin/plugins/JellyseerrBridge_0.1.0.2
 ```
 
 Remove the plugin configuration if you also want to delete saved settings:

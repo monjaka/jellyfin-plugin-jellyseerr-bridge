@@ -3,9 +3,9 @@ param(
     [string]$Owner,
 
     [string]$Repo = "jellyfin-plugin-jellyseerr-bridge",
-    [string]$Version = "0.1.0.1",
-    [string]$Tag = "v0.1.1",
-    [string]$ZipPath = "dist/JellyseerrBridge_0.1.0.1.zip",
+    [string]$Version = "0.1.0.2",
+    [string]$Tag = "v0.1.2",
+    [string]$ZipPath = "dist/JellyseerrBridge_0.1.0.2.zip",
     [string]$TargetAbi = "10.11.0.0"
 )
 
@@ -32,7 +32,7 @@ $Manifest = @(
         versions = @(
             @{
                 version = $Version
-                changelog = "Adds a built-in Jellyfin main-menu Request page."
+                changelog = "Aligns plugin assembly version with the Jellyfin package version."
                 targetAbi = $TargetAbi
                 sourceUrl = $SourceUrl
                 checksum = $Checksum

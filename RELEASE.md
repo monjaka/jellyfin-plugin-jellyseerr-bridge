@@ -18,11 +18,11 @@ dotnet build -c Release
 Package the build output:
 
 ```bash
-mkdir -p dist/JellyseerrBridge_0.1.0.0
-cp src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/* dist/JellyseerrBridge_0.1.0.0/
+mkdir -p dist/JellyseerrBridge_0.1.0.2
+cp src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/* dist/JellyseerrBridge_0.1.0.2/
 cd dist
-zip -r JellyseerrBridge_0.1.0.0.zip JellyseerrBridge_0.1.0.0
-md5sum JellyseerrBridge_0.1.0.0.zip
+zip -r JellyseerrBridge_0.1.0.2.zip JellyseerrBridge_0.1.0.2
+md5sum JellyseerrBridge_0.1.0.2.zip
 ```
 
 ## GitHub Release
@@ -30,13 +30,13 @@ md5sum JellyseerrBridge_0.1.0.0.zip
 Create a GitHub release such as:
 
 ```text
-v0.1.0
+v0.1.2
 ```
 
 Attach:
 
 ```text
-JellyseerrBridge_0.1.0.0.zip
+JellyseerrBridge_0.1.0.2.zip
 ```
 
 ## Manifest
@@ -44,13 +44,13 @@ JellyseerrBridge_0.1.0.0.zip
 Generate `manifest.json` after the release zip exists:
 
 ```bash
-./scripts/generate-manifest.sh monjaka jellyfin-plugin-jellyseerr-bridge 0.1.0.0 v0.1.0 dist/JellyseerrBridge_0.1.0.0.zip > manifest.json
+./scripts/generate-manifest.sh monjaka jellyfin-plugin-jellyseerr-bridge 0.1.0.2 v0.1.2 dist/JellyseerrBridge_0.1.0.2.zip > manifest.json
 ```
 
 PowerShell:
 
 ```powershell
-.\scripts\generate-manifest.ps1 -Owner monjaka -ZipPath dist\JellyseerrBridge_0.1.0.0.zip > manifest.json
+.\scripts\generate-manifest.ps1 -Owner monjaka -ZipPath dist\JellyseerrBridge_0.1.0.2.zip > manifest.json
 ```
 
 Commit `manifest.json` so Jellyfin can read it from:
@@ -61,4 +61,4 @@ https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main
 
 Users can add that URL under Jellyfin Dashboard -> Plugins -> Repositories.
 
-Important: Jellyfin downloads the plugin package from the version's `sourceUrl`. That field must point to `JellyseerrBridge_0.1.0.0.zip`, not the GitHub repository page.
+Important: Jellyfin downloads the plugin package from the version's `sourceUrl`. That field must point to `JellyseerrBridge_0.1.0.2.zip`, not the GitHub repository page.

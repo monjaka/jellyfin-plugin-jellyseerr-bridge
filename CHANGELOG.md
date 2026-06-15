@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0.2
+
+Aligns the plugin DLL assembly version with the Jellyfin package version.
+
+Fixes:
+
+- Jellyfin no longer reports the loaded plugin assembly as `1.0.0.0`.
+
 ## 0.1.0.1
 
 Adds a built-in Jellyfin main-menu `Request` page using Jellyfin's plugin page system.
