@@ -11,6 +11,7 @@ The plugin provides:
 - Jellyseerr-provided availability and request status drives request buttons.
 - Server-side forwarding to Jellyseerr using a configured Jellyseerr URL and API key.
 - A narrow request API that validates input instead of acting as an open proxy.
+- A built-in Jellyfin main-menu `Request` page using Jellyfin's plugin page system.
 - A plugin-served Jellyfin Web entry script for a `Request` tab and side-menu `Requests` entry.
 
 ## Quick Start
@@ -54,6 +55,17 @@ https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main
 
 See [REPOSITORY_INSTALL.md](REPOSITORY_INSTALL.md).
 
+After Jellyfin restarts, the plugin adds a Jellyfin main-menu `Request` entry. To add the extra top `Request` tab beside Home and Favourites, install the optional web loader:
+
+```bash
+curl -fsSLO https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main/scripts/install-web-loader.sh
+less install-web-loader.sh
+sudo bash install-web-loader.sh
+sudo systemctl restart jellyfin
+```
+
+The loader installer backs up `index.html` before editing it and does nothing if the loader is already present.
+
 ## Security Model
 
 The Jellyseerr API key is stored only in the Jellyfin plugin configuration and is used server-side by the plugin.
@@ -73,7 +85,7 @@ It does not forward arbitrary request bodies to Jellyseerr.
 
 ## Jellyfin Web Integration
 
-Jellyfin server plugins can provide backend APIs and admin configuration pages. Jellyfin Web does not currently provide a stable public API for plugins to register top-level tabs or side-menu items without a web loader.
+Jellyfin server plugins can provide backend APIs, admin configuration pages, and main-menu plugin pages.
 
 For a stable plugin install, use:
 
@@ -81,13 +93,15 @@ For a stable plugin install, use:
 https://your-jellyfin-domain/JellyseerrBridge/Page
 ```
 
-For the more native experience, the plugin serves this entry script:
+The built-in main-menu page is the recommended navigation entry point. For installs that also want a top tab beside Home and Favourites, the plugin serves this optional entry script:
 
 ```text
 /JellyseerrBridge/Assets/request-entry.js
 ```
 
 Loading that script from Jellyfin Web adds a `Request` tab and side-menu `Requests` entry that point at the plugin-served request page. Jellyfin Web updates may still require re-adding the loader tag to `index.html`, but the actual behavior lives inside the plugin package.
+
+Use [WEB_LOADER.md](WEB_LOADER.md) for the helper script and manual install options.
 
 ## Configuration
 

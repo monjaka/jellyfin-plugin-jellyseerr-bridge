@@ -22,7 +22,7 @@ mkdir -p dist/JellyseerrBridge_0.1.0.0
 cp src/Jellyfin.Plugin.JellyseerrBridge/bin/Release/net9.0/* dist/JellyseerrBridge_0.1.0.0/
 cd dist
 zip -r JellyseerrBridge_0.1.0.0.zip JellyseerrBridge_0.1.0.0
-sha256sum JellyseerrBridge_0.1.0.0.zip
+md5sum JellyseerrBridge_0.1.0.0.zip
 ```
 
 ## GitHub Release
@@ -60,3 +60,5 @@ https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main
 ```
 
 Users can add that URL under Jellyfin Dashboard -> Plugins -> Repositories.
+
+Important: Jellyfin downloads the plugin package from the version's `sourceUrl`. That field must point to `JellyseerrBridge_0.1.0.0.zip`, not the GitHub repository page.

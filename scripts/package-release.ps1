@@ -20,5 +20,5 @@ New-Item -ItemType Directory -Force $PluginDir | Out-Null
 Copy-Item -Recurse -Force (Join-Path $BuildDir "*") $PluginDir
 
 Compress-Archive -Path $PluginDir -DestinationPath $ZipFile -Force
-Get-FileHash -Algorithm SHA256 $ZipFile
+Get-FileHash -Algorithm MD5 $ZipFile
 Write-Output $ZipFile

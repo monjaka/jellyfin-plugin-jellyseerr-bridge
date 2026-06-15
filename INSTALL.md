@@ -30,6 +30,15 @@ After `manifest.json` and the release zip are published on GitHub:
 5. Install `Jellyseerr Bridge`.
 6. Restart Jellyfin.
 7. Configure the plugin.
+8. Confirm that the Jellyfin main menu has a `Request` entry.
+9. Optional: install the Jellyfin Web loader for an extra top `Request` tab beside Home and Favourites:
+
+   ```bash
+   curl -fsSLO https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main/scripts/install-web-loader.sh
+   less install-web-loader.sh
+   sudo bash install-web-loader.sh
+   sudo systemctl restart jellyfin
+   ```
 
 See [REPOSITORY_INSTALL.md](REPOSITORY_INSTALL.md) for publisher setup.
 
@@ -85,7 +94,9 @@ The request page is served by Jellyfin:
 https://your-jellyfin-domain/JellyseerrBridge/Page
 ```
 
-The plugin also serves a Jellyfin Web entry script:
+After restart, the plugin also adds a Jellyfin main-menu `Request` page.
+
+The plugin also serves an optional Jellyfin Web entry script:
 
 ```text
 /JellyseerrBridge/Assets/request-entry.js
@@ -96,7 +107,7 @@ Loading that script from Jellyfin Web adds:
 - a top `Request` tab beside Home and Favourites
 - a side-menu `Requests` item
 
-See [WEB_LOADER.md](WEB_LOADER.md) for the native navigation setup.
+See [WEB_LOADER.md](WEB_LOADER.md) for the native navigation setup and uninstall helper.
 
 ## Uninstall
 
@@ -118,7 +129,13 @@ Remove the plugin configuration if you also want to delete saved settings:
 sudo rm -f /var/lib/jellyfin/plugins/configurations/Jellyfin.Plugin.JellyseerrBridge.xml
 ```
 
-If you added the optional Jellyfin Web loader tag, remove it from Jellyfin Web's `index.html`.
+If you added the optional Jellyfin Web loader tag, remove it with:
+
+```bash
+curl -fsSLO https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main/scripts/uninstall-web-loader.sh
+less uninstall-web-loader.sh
+sudo bash uninstall-web-loader.sh
+```
 
 Start Jellyfin:
 

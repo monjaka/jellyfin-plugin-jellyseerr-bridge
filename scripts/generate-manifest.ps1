@@ -3,9 +3,9 @@ param(
     [string]$Owner,
 
     [string]$Repo = "jellyfin-plugin-jellyseerr-bridge",
-    [string]$Version = "0.1.0.0",
-    [string]$Tag = "v0.1.0",
-    [string]$ZipPath = "dist/JellyseerrBridge_0.1.0.0.zip",
+    [string]$Version = "0.1.0.1",
+    [string]$Tag = "v0.1.1",
+    [string]$ZipPath = "dist/JellyseerrBridge_0.1.0.1.zip",
     [string]$TargetAbi = "10.11.0.0"
 )
 
@@ -15,10 +15,10 @@ if (-not (Test-Path -LiteralPath $ZipPath)) {
     throw "Release zip not found: $ZipPath"
 }
 
-$Checksum = (Get-FileHash -Algorithm SHA256 -LiteralPath $ZipPath).Hash.ToLowerInvariant()
+$Checksum = (Get-FileHash -Algorithm MD5 -LiteralPath $ZipPath).Hash.ToLowerInvariant()
 $Timestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
 $ReleaseUrl = "https://github.com/$Owner/$Repo/releases/download/$Tag/JellyseerrBridge_$Version.zip"
-$SourceUrl = "https://github.com/$Owner/$Repo"
+$SourceUrl = $ReleaseUrl
 $RepositoryUrl = "https://raw.githubusercontent.com/$Owner/$Repo/main/manifest.json"
 
 $Manifest = @(
@@ -32,7 +32,7 @@ $Manifest = @(
         versions = @(
             @{
                 version = $Version
-                changelog = "Initial preview release."
+                changelog = "Adds a built-in Jellyfin main-menu Request page."
                 targetAbi = $TargetAbi
                 sourceUrl = $SourceUrl
                 checksum = $Checksum

@@ -1,19 +1,19 @@
-﻿[
+[
     {
         "name":  "Jellyseerr Bridge",
         "owner":  "monjaka",
         "description":  "A Jellyfin plugin that provides a Jellyseerr-powered request page with server-side API-key forwarding.",
         "versions":  [
                          {
-                             "url":  "https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge/releases/download/v0.1.0/JellyseerrBridge_0.1.0.0.zip",
-                             "checksum":  "b19acbb16a267b56db989179726a29c53ff3c4b5a5abda9d16a09a305e42aa2f",
-                             "version":  "0.1.0.0",
+                             "url":  "https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge/releases/download/v0.1.1/JellyseerrBridge_0.1.0.1.zip",
+                             "checksum":  "27884436ce23c7b23566036c6a4250f9",
+                             "version":  "0.1.0.1",
                              "repositoryUrl":  "https://raw.githubusercontent.com/monjaka/jellyfin-plugin-jellyseerr-bridge/main/manifest.json",
-                             "timestamp":  "2026-06-14T23:31:37Z",
-                             "sourceUrl":  "https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge",
+                             "timestamp":  "2026-06-15T00:35:00Z",
+                             "sourceUrl":  "https://github.com/monjaka/jellyfin-plugin-jellyseerr-bridge/releases/download/v0.1.1/JellyseerrBridge_0.1.0.1.zip",
                              "repositoryName":  "Jellyseerr Bridge",
                              "targetAbi":  "10.11.0.0",
-                             "changelog":  "Initial preview release."
+                             "changelog":  "Adds a built-in Jellyfin main-menu Request page."
                          }
                      ],
         "category":  "General",

@@ -19,7 +19,7 @@ cp -a "$build_dir"/. "$plugin_dir"/
 (cd "$dist_dir" && zip -r "JellyseerrBridge_${version}.zip" "JellyseerrBridge_${version}")
 
 if command -v sha256sum >/dev/null 2>&1; then
-  sha256sum "$zip_file"
+md5sum "$zip_file"
 fi
 
 echo "$zip_file"

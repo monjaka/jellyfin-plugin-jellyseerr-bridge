@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Configuration\configPage.html" />
+    <EmbeddedResource Include="Configuration\requestPage.html" />
     <EmbeddedResource Include="Web\request-page.html" />
     <EmbeddedResource Include="Web\request-page.js" />
     <EmbeddedResource Include="Web\request-entry.js" />

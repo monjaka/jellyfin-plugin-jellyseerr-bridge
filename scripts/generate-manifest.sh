@@ -3,8 +3,8 @@ set -euo pipefail
 
 owner="${1:?owner/org is required}"
 repo="${2:-jellyfin-plugin-jellyseerr-bridge}"
-version="${3:-0.1.0.0}"
-tag="${4:-v0.1.0}"
+version="${3:-0.1.0.1}"
+tag="${4:-v0.1.1}"
 zip_path="${5:-dist/JellyseerrBridge_${version}.zip}"
 target_abi="${6:-10.11.0.0}"
 
@@ -13,10 +13,10 @@ if [ ! -f "$zip_path" ]; then
   exit 1
 fi
 
-checksum="$(sha256sum "$zip_path" | awk '{print $1}')"
+checksum="$(md5sum "$zip_path" | awk '{print $1}')"
 timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 release_url="https://github.com/${owner}/${repo}/releases/download/${tag}/JellyseerrBridge_${version}.zip"
-source_url="https://github.com/${owner}/${repo}"
+source_url="${release_url}"
 repository_url="https://raw.githubusercontent.com/${owner}/${repo}/main/manifest.json"
 
 cat <<JSON
@@ -31,7 +31,7 @@ cat <<JSON
     "versions": [
       {
         "version": "${version}",
-        "changelog": "Initial preview release.",
+        "changelog": "Adds a built-in Jellyfin main-menu Request page.",
         "targetAbi": "${target_abi}",
         "sourceUrl": "${source_url}",
         "checksum": "${checksum}",

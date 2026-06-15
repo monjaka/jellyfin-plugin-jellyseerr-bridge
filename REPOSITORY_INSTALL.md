@@ -65,7 +65,7 @@ Jellyfin plugin repository installation works from a manifest URL. The manifest 
 - plugin ID
 - plugin name
 - Jellyfin target ABI
-- release zip download URL
-- SHA256 checksum for the release zip
+- release zip download URL in `sourceUrl`
+- MD5 checksum for the release zip
 
-The plugin cannot be installed from only a source repository. Jellyfin needs the compiled plugin zip referenced by the manifest.
+The plugin cannot be installed from only a source repository. Jellyfin needs the compiled plugin zip referenced by the manifest. In Jellyfin's manifest format, `sourceUrl` must point to the release zip, not the GitHub repository page.

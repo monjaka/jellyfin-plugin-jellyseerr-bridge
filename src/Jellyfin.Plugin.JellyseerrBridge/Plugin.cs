@@ -48,6 +48,18 @@ public sealed class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
                     CultureInfo.InvariantCulture,
                     "{0}.Configuration.configPage.html",
                     GetType().Namespace)
+            },
+            new PluginPageInfo
+            {
+                Name = "JellyseerrBridgeRequests",
+                DisplayName = "Request",
+                EnableInMainMenu = true,
+                MenuSection = "main",
+                MenuIcon = "add",
+                EmbeddedResourcePath = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}.Configuration.requestPage.html",
+                    GetType().Namespace)
             }
         ];
     }

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0.1
+
+Adds a built-in Jellyfin main-menu `Request` page using Jellyfin's plugin page system.
+
+Fixes:
+
+- Main-menu access no longer requires editing Jellyfin Web's `index.html`.
+- Release tooling now emits Jellyfin-compatible MD5 package checksums.
+
 ## 0.1.0.0
 
 Initial preview release.
